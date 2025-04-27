@@ -13,7 +13,7 @@ export default function Navbar() {
         className="flex items-center gap-2"
       >
         <FiMoon className="w-6 h-6 text-amber-300" />
-        <Link href="/" className="text-xl font-bold">Aura</Link>
+        <Link href="/" className="text-xl font-bold">Snoov</Link>
       </motion.div>
       
       <div className="hidden md:flex gap-6">
