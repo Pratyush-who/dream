@@ -1,187 +1,203 @@
-import { motion } from 'framer-motion';
-import Head from 'next/head';
-import { FiSearch, FiFilter, FiBookOpen, FiHeart, FiShare2 } from 'react-icons/fi';
+'use client';
+import { motion } from 'framer-motion'
+import { FiMoon, FiSun, FiBookOpen, FiFilm, FiPenTool, FiShare2 } from 'react-icons/fi'
+import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
+import { useState } from 'react';
 
-type Dream = {
-  id: string;
-  title: string;
-  excerpt: string;
-  mood: string;
-  language: string;
-  likes: number;
-  date: string;
-  isPublic: boolean;
-};
-
-export default function DreamLibrary() {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedMood, setSelectedMood] = useState<string>('all');
-  const [selectedLanguage, setSelectedLanguage] = useState<string>('all');
-  
-  const dreams: Dream[] = [
-    {
-      id: '1',
-      title: 'The Floating City',
-      excerpt: 'I dreamed of a city that floated above the clouds, with bridges made of light connecting the buildings...',
-      mood: 'surreal',
-      language: 'english',
-      likes: 42,
-      date: '2 days ago',
-      isPublic: true
-    },
-    {
-      id: '2',
-      title: 'समुद्र के नीचे का मंदिर',
-      excerpt: 'मैंने सपना देखा कि मैं एक प्राचीन मंदिर में था जो समुद्र के नीचे था...',
-      mood: 'adventure',
-      language: 'hindi',
-      likes: 28,
-      date: '1 week ago',
-      isPublic: true
-    },
-    {
-      id: '3',
-      title: 'The Chase',
-      excerpt: 'I was being chased through a maze of mirrors by a shadowy figure...',
-      mood: 'horror',
-      language: 'english',
-      likes: 35,
-      date: '3 days ago',
-      isPublic: true
-    },
-    {
-      id: '4',
-      title: 'மலைக்குள் மறைந்த நகரம்',
-      excerpt: 'ஒரு மலையின் உள்ளே மறைந்து கிடந்த பழைய நகரத்தை கண்டேன்...',
-      mood: 'adventure',
-      language: 'tamil',
-      likes: 19,
-      date: '5 days ago',
-      isPublic: true
-    }
-  ];
-
-  const filteredDreams = dreams.filter(dream => {
-    const matchesSearch = dream.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                         dream.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesMood = selectedMood === 'all' || dream.mood === selectedMood;
-    const matchesLanguage = selectedLanguage === 'all' || dream.language === selectedLanguage;
-    
-    return matchesSearch && matchesMood && matchesLanguage;
-  });
-
+export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-indigo-50 to-purple-50 text-gray-900">
-      <Head>
-        <title>Dream Library | Aura</title>
-      </Head>
-
+    <div className="min-h-screen bg-gradient-to-b from-indigo-900 to-purple-900 text-white">
       <Navbar />
 
-      <main className="container mx-auto px-4 py-12">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="max-w-6xl mx-auto"
-        >
-          <div className="flex items-center gap-3 mb-8">
-            <FiBookOpen className="w-6 h-6 text-purple-600" />
-            <h1 className="text-3xl font-bold">Dream Library</h1>
-          </div>
+      <main className="container mx-auto px-4 py-16">
+        {/* Hero Section */}
+        <section className="text-center mb-20">
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-5xl md:text-7xl font-bold mb-6"
+          >
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-300 to-pink-400">
+              From Dreams to Reality
+            </span>
+          </motion.h1>
+          
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-xl md:text-2xl max-w-3xl mx-auto mb-10"
+          >
+            Capture your dreams, transform them into stories, and collaborate with creators worldwide.
+          </motion.p>
 
-          <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
-            <div className="flex flex-col md:flex-row gap-4 mb-6">
-              <div className="relative flex-grow">
-                <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                <input
-                  type="text"
-                  placeholder="Search dreams..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                />
-              </div>
-              
-              <div className="flex gap-2">
-                <div className="relative">
-                  <FiFilter className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                  <select
-                    value={selectedMood}
-                    onChange={(e) => setSelectedMood(e.target.value)}
-                    className="pl-10 pr-4 py-2 border border-gray-200 rounded-lg appearance-none"
-                  >
-                    <option value="all">All Moods</option>
-                    <option value="surreal">Surreal</option>
-                    <option value="romantic">Romantic</option>
-                    <option value="horror">Horror</option>
-                    <option value="adventure">Adventure</option>
-                  </select>
-                </div>
-                
-                <div className="relative">
-                  <FiFilter className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                  <select
-                    value={selectedLanguage}
-                    onChange={(e) => setSelectedLanguage(e.target.value)}
-                    className="pl-10 pr-4 py-2 border border-gray-200 rounded-lg appearance-none"
-                  >
-                    <option value="all">All Languages</option>
-                    <option value="english">English</option>
-                    <option value="hindi">Hindi</option>
-                    <option value="tamil">Tamil</option>
-                    <option value="bengali">Bengali</option>
-                    <option value="telugu">Telugu</option>
-                  </select>
-                </div>
-              </div>
-            </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="flex flex-col sm:flex-row justify-center gap-4"
+          >
+            <a href="/journal" className="bg-pink-500 hover:bg-pink-600 px-8 py-3 rounded-full font-semibold text-lg transition-all">
+              Start Journaling
+            </a>
+            <a href="/library" className="bg-transparent border-2 border-white hover:bg-white hover:text-purple-900 px-8 py-3 rounded-full font-semibold text-lg transition-all">
+              Explore Dreams
+            </a>
+          </motion.div>
+        </section>
 
-            {filteredDreams.length === 0 ? (
-              <div className="text-center py-12">
-                <p className="text-gray-500">No dreams found matching your criteria.</p>
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {filteredDreams.map((dream) => (
-                  <motion.div
-                    key={dream.id}
-                    whileHover={{ y: -5 }}
-                    className="border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow"
-                  >
-                    <div className="p-6">
-                      <div className="flex justify-between items-start mb-2">
-                        <h3 className="text-xl font-semibold">{dream.title}</h3>
-                        <span className="text-xs px-2 py-1 bg-purple-100 text-purple-800 rounded-full capitalize">
-                          {dream.mood}
-                        </span>
-                      </div>
-                      
-                      <p className="text-gray-600 mb-4">{dream.excerpt}</p>
-                      
-                      <div className="flex justify-between items-center text-sm">
-                        <span className="text-gray-500">{dream.date}</span>
-                        <div className="flex gap-4">
-                          <button className="flex items-center gap-1 text-gray-500 hover:text-purple-600">
-                            <FiHeart className="w-4 h-4" />
-                            <span>{dream.likes}</span>
-                          </button>
-                          <button className="flex items-center gap-1 text-gray-500 hover:text-purple-600">
-                            <FiShare2 className="w-4 h-4" />
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            )}
-          </div>
-        </motion.div>
+        {/* Value Proposition */}
+        <DreamerCreatorSection />
+
+        {/* Testimonials */}
+        <TestimonialsSection />
+
+        {/* CTA */}
+        <section className="text-center mt-20">
+          <h2 className="text-3xl font-bold mb-6">Ready to explore the world of dreams?</h2>
+          <a href="/journal" className="inline-block bg-amber-400 hover:bg-amber-500 text-purple-900 px-8 py-3 rounded-full font-semibold text-lg transition-all">
+            Join Aura Now
+          </a>
+        </section>
       </main>
 
       <Footer />
     </div>
-  );
+  )
 }
 
-// Reuse Navbar and Footer components from index.tsx
+const DreamerCreatorSection = () => {
+  const [activeTab, setActiveTab] = useState<'dreamer' | 'creator'>('dreamer')
+
+  return (
+    <section className="mb-20">
+      <div className="flex justify-center mb-10">
+        <div className="flex bg-purple-800 rounded-full p-1">
+          <button
+            onClick={() => setActiveTab('dreamer')}
+            className={`px-6 py-2 rounded-full transition-all ${activeTab === 'dreamer' ? 'bg-white text-purple-900 font-semibold' : 'text-white'}`}
+          >
+            For Dreamers
+          </button>
+          <button
+            onClick={() => setActiveTab('creator')}
+            className={`px-6 py-2 rounded-full transition-all ${activeTab === 'creator' ? 'bg-white text-purple-900 font-semibold' : 'text-white'}`}
+          >
+            For Creators
+          </button>
+        </div>
+      </div>
+
+      {activeTab === 'dreamer' ? (
+        <motion.div
+          key="dreamer"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="grid md:grid-cols-3 gap-8"
+        >
+          <FeatureCard 
+            icon={<FiMoon className="w-8 h-8" />}
+            title="Record Your Dreams"
+            description="Capture dreams as soon as you wake up using voice or text in any language."
+          />
+          <FeatureCard 
+            icon={<FiBookOpen className="w-8 h-8" />}
+            title="Transform to Stories"
+            description="AI converts your dreams into beautiful stories, poems, or scripts."
+          />
+          <FeatureCard 
+            icon={<FiShare2 className="w-8 h-8" />}
+            title="Share & Inspire"
+            description="Optionally share your dreams to inspire creators worldwide."
+          />
+        </motion.div>
+      ) : (
+        <motion.div
+          key="creator"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="grid md:grid-cols-3 gap-8"
+        >
+          <FeatureCard 
+            icon={<FiSun className="w-8 h-8" />}
+            title="Endless Inspiration"
+            description="Access a library of unique dreams to spark your next project."
+          />
+          <FeatureCard 
+            icon={<FiFilm className="w-8 h-8" />}
+            title="Adapt Dreams"
+            description="Turn dreams into films, animations, comics, or literature."
+          />
+          <FeatureCard 
+            icon={<FiPenTool className="w-8 h-8" />}
+            title="Showcase Work"
+            description="Share your creations and connect with the dreamers who inspired you."
+          />
+        </motion.div>
+      )}
+    </section>
+  )
+}
+
+const FeatureCard = ({ icon, title, description }: { icon: React.ReactNode, title: string, description: string }) => {
+  return (
+    <motion.div 
+      whileHover={{ y: -5 }}
+      className="bg-purple-800/50 backdrop-blur-sm p-6 rounded-xl border border-purple-700"
+    >
+      <div className="bg-purple-600 w-12 h-12 rounded-full flex items-center justify-center mb-4">
+        {icon}
+      </div>
+      <h3 className="text-xl font-semibold mb-2">{title}</h3>
+      <p className="text-purple-100">{description}</p>
+    </motion.div>
+  )
+}
+
+const TestimonialsSection = () => {
+  const testimonials = [
+    {
+      quote: "As a filmmaker, I'm always chasing raw, untold stories. Aura became my secret treasure chest — someone's dream turned into my award-winning short film.",
+      author: "Rahul, Filmmaker",
+      role: "Short Film Director"
+    },
+    {
+      quote: "I used to stare at blank pages for hours. Then I started exploring dreams on Aura. One dream about a drowning moon became my most loved poem.",
+      author: "Priya, Poet",
+      role: "Published Author"
+    },
+    {
+      quote: "The surreal dream fragments on this app? Goldmine. I turned 5 anonymous dreams into a visual comic series — and the response? Mind-blowing.",
+      author: "Arjun, Comic Artist",
+      role: "Graphic Novelist"
+    }
+  ]
+
+  return (
+    <section className="my-20">
+      <h2 className="text-3xl font-bold text-center mb-12">What Our Community Says</h2>
+      <div className="grid md:grid-cols-3 gap-8">
+        {testimonials.map((testimonial, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            viewport={{ once: true }}
+            className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20"
+          >
+            <p className="italic text-lg mb-4">"{testimonial.quote}"</p>
+            <div>
+              <p className="font-semibold">{testimonial.author}</p>
+              <p className="text-sm text-white/70">{testimonial.role}</p>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </section>
+  )
+}
