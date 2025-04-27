@@ -58,7 +58,7 @@ export default function Home() {
         <section className="text-center mt-20">
           <h2 className="text-3xl font-bold mb-6">Ready to explore the world of dreams?</h2>
           <a href="/journal" className="inline-block bg-amber-400 hover:bg-amber-500 text-purple-900 px-8 py-3 rounded-full font-semibold text-lg transition-all">
-            Join Aura Now
+            Join Snoov Now
           </a>
         </section>
       </main>
@@ -161,12 +161,12 @@ const FeatureCard = ({ icon, title, description }: { icon: React.ReactNode, titl
 const TestimonialsSection = () => {
   const testimonials = [
     {
-      quote: "As a filmmaker, I'm always chasing raw, untold stories. Aura became my secret treasure chest — someone's dream turned into my award-winning short film.",
+      quote: "As a filmmaker, I'm always chasing raw, untold stories. Snoov became my secret treasure chest — someone's dream turned into my award-winning short film.",
       author: "Rahul, Filmmaker",
       role: "Short Film Director"
     },
     {
-      quote: "I used to stare at blank pages for hours. Then I started exploring dreams on Aura. One dream about a drowning moon became my most loved poem.",
+      quote: "I used to stare at blank pages for hours. Then I started exploring dreams on Snoov. One dream about a drowning moon became my most loved poem.",
       author: "Priya, Poet",
       role: "Published Author"
     },

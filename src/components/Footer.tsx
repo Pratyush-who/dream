@@ -9,7 +9,7 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <FiMoon className="w-5 h-5 text-amber-300" />
-              <span className="font-bold">Aura</span>
+              <span className="font-bold">Snoov</span>
             </div>
             <p className="text-white/70">Bringing dreams to life through creative collaboration.</p>
           </div>
@@ -43,7 +43,7 @@ export default function Footer() {
         </div>
         
         <div className="border-t border-white/10 mt-12 pt-8 text-center text-white/50 text-sm">
-          <p>© 2023 Aura. All rights reserved.</p>
+          <p>© 2023 Snoov. All rights reserved.</p>
         </div>
       </div>
     </footer>
